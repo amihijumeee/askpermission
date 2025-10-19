@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Will you come with me?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#ff6b81; /* warm pink */
+      --accent-2:#ffd166; /* warm yellow */
+      --bg:#0f1724; /* deep navy */
+      --card:#0b1220;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{
+      background: radial-gradient(1200px 600px at 10% 20%, rgba(255,107,129,0.08), transparent 10%),
+                  radial-gradient(900px 400px at 90% 80%, rgba(255,209,102,0.06), transparent 10%),
+                  linear-gradient(180deg,var(--bg), #071027 70%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;align-items:center;justify-content:center;padding:32px;
+    }
+    .wrapper{width:min(980px,96%);max-width:980px}
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:20px;padding:28px;box-shadow:0 10px 30px rgba(2,6,23,0.6);overflow:hidden;border:1px solid rgba(255,255,255,0.04);
+    }
+
+    header{
+      display:flex;gap:16px;align-items:center;margin-bottom:18px
+    }
+    .logo{
+      width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px;color:#fff;font-family:'Great Vibes', cursive;box-shadow:0 6px 20px rgba(255,107,129,0.18)
+    }
+    h1{margin:0;font-size:28px}
+    .sub{opacity:0.9;margin-top:6px;color:rgba(230,238,248,0.86)}
+
+    .main{
+      display:grid;grid-template-columns:1fr 380px;gap:22px;align-items:start
+    }
+
+    /* left */
+    .hero{
+      padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));min-height:360px;position:relative;overflow:hidden
+    }
+    .hero img{width:100%;height:220px;object-fit:cover;border-radius:10px;margin-bottom:12px}
+    .quote{font-family:'Great Vibes',cursive;font-size:34px;margin:8px 0}
+    .p{opacity:0.95;line-height:1.45}
+
+    .cta-row{display:flex;gap:12px;margin-top:12px}
+    .btn{padding:12px 16px;border-radius:12px;border:0;cursor:pointer;font-weight:700;letter-spacing:0.2px}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#ff9aa2);color:#fff;box-shadow:0 8px 30px rgba(255,107,129,0.12)}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent);}
+
+    /* right */
+    .side{
+      padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));height:100%
+    }
+    .card-title{font-weight:700;margin-bottom:8px}
+    .itinerary{font-size:14px;line-height:1.45;color:rgba(230,238,248,0.95)}
+    .pill{display:inline-block;padding:6px 10px;background:rgba(255,255,255,0.02);border-radius:999px;font-weight:600;margin:6px 6px 6px 0}
+
+    .hearts{position:absolute;right:18px;top:18px;pointer-events:none}
+    .heart{width:14px;height:14px;border-radius:50%;transform:translateY(0);opacity:0.95;animation:float 6s infinite}
+    .heart:nth-child(1){background:var(--accent);left:10px;animation-duration:4s}
+    .heart:nth-child(2){background:#ff9cba;animation-duration:5.2s}
+    .heart:nth-child(3){background:#ffb4c8;animation-duration:6s}
+
+    @keyframes float{
+      0%{transform:translateY(0) scale(1);opacity:0.9}
+      50%{transform:translateY(-18px) scale(1.06);opacity:1}
+      100%{transform:translateY(0) scale(1);opacity:0.9}
+    }
+
+    /* modal */
+    .modal-bg{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:flex;align-items:center;justify-content:center;z-index:40}
+    .modal{width:94%;max-width:720px;background:#071027;padding:22px;border-radius:14px;border:1px solid rgba(255,255,255,0.04)}
+    .modal h2{margin:0 0 8px}
+    .close{float:right;background:transparent;border:0;color:#fff;font-size:18px}
+
+    /* responsiveness */
+    @media (max-width:880px){
+      .main{grid-template-columns:1fr;}
+      .side{order:2}
+      .hero{order:1}
+    }
+
+    footer{opacity:0.9;margin-top:14px;font-size:13px;color:rgba(230,238,248,0.75)}
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <header>
+        <div class="logo">❤</div>
+        <div>
+          <h1>Will you come with me?</h1>
+          <div class="sub">A little surprise page made just for you 💌</div>
+        </div>
+      </header>
+
+      <div class="main">
+        <section class="hero">
+          <div class="hearts">
+            <div class="heart"></div>
+            <div class="heart"></div>
+            <div class="heart"></div>
+          </div>
+
+          <img id="heroImg" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=60" alt="Destination picture">
+
+          <div class="quote" id="quote">"Let's go where the sky is big and the city is small."</div>
+
+          <p class="p" id="message">Hey love — I found a sweet place that I think we'd both enjoy. It's warm, cozy, and perfect for us to make a little memory together. I planned a soft, easy day so we can just relax and be silly — no heavy schedule, promise.</p>
+
+          <div class="cta-row">
+            <button class="btn btn-primary" id="openPlan">See the plan ✨</button>
+            <button class="btn btn-ghost" id="surpriseBtn">I want a tiny surprise</button>
+          </div>
+
+          <footer>Tip: click "See the plan" for the little itinerary, or "I want a tiny surprise" if you'd like me to keep it extra secret 😉</footer>
+        </section>
+
+        <aside class="side">
+          <div class="card-title">Quick details</div>
+          <div class="pill">Destination: <strong id="destName">Paradise Cove</strong></div>
+          <div class="pill">Duration: 1 day</div>
+          <div class="pill">Date: <strong id="dateText">Saturday, Nov 22</strong></div>
+
+          <hr style="border:none;border-top:1px solid rgba(255,255,255,0.04);margin:12px 0">
+
+          <div class="itinerary">
+            <strong>Simple plan</strong>
+            <ol style="margin-top:8px;padding-left:18px">
+              <li>Breakfast together at a cozy cafe ☕</li>
+              <li>Walk by the shore and take silly photos 📸</li>
+              <li>Lunch at a small spot I picked 🍝</li>
+              <li>Golden hour stop — bring your favorite song 🎶</li>
+            </ol>
+          </div>
+
+          <div style="margin-top:12px">
+            <button class="btn btn-primary" id="yesBtn">Yes — let's go! ❤️</button>
+            <button class="btn btn-ghost" id="noBtn">Maybe another day</button>
+          </div>
+
+          <div style="margin-top:18px;font-size:13px;opacity:0.9">P.S. I can change the date, time, or place if you'd prefer something else. This is just a little idea to make you smile.</div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <template id="modalTpl">
+    <div class="modal-bg" role="dialog" aria-modal="true">
+      <div class="modal">
+        <button class="close" id="closeModal">✕</button>
+        <h2>Our little plan</h2>
+        <p style="line-height:1.45">I've pinned a few sweet spots and made a soft plan so we can relax and enjoy the day together. If you want, I can arrange tickets/reservations — or we can just wander. Either way, I'm happiest when I'm with you.</p>
+
+        <ul style="margin-top:10px;line-height:1.6">
+          <li>07:45 — Meet for breakfast</li>
+          <li>09:30 — Stroll and photos at the shore</li>
+          <li>12:30 — Lunch
+            <div style="font-size:13px;opacity:0.85;margin-top:6px">(I chose a small family-run place — they have amazing pasta.)</div>
+          </li>
+          <li>17:30 — Golden hour & ice cream</li>
+        </ul>
+
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+          <button class="btn btn-ghost" id="modalClose2">Close</button>
+          <button class="btn btn-primary" id="modalYes">Book it for us 🌟</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    // --- Configuration (edit these strings to personalise) ---
+    const CONFIG = {
+      DESTINATION_NAME: 'Paradise Cove',
+      DATE_TEXT: 'Saturday, Nov 22',
+      HERO_IMAGE: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=60',
+      QUOTE: "Let's go where the sky is big and the city is small.",
+      MESSAGE: "Hey love — I found a sweet place that I think we'd both enjoy. It's warm, cozy, and perfect for us to make a little memory together. I planned a soft, easy day so we can just relax and be silly — no heavy schedule, promise."
+    }
+
+    // apply config
+    document.getElementById('destName').textContent = CONFIG.DESTINATION_NAME;
+    document.getElementById('dateText').textContent = CONFIG.DATE_TEXT;
+    document.getElementById('quote').textContent = CONFIG.QUOTE;
+    document.getElementById('message').textContent = CONFIG.MESSAGE;
+
+    // modal handling
+    const openPlan = document.getElementById('openPlan');
+    const template = document.getElementById('modalTpl');
+    openPlan.addEventListener('click', ()=>{
+      const node = template.content.cloneNode(true);
+      document.body.appendChild(node);
+      const bg = document.querySelector('.modal-bg');
+      const close = document.getElementById('closeModal');
+      const close2 = document.getElementById('modalClose2');
+      const yes = document.getElementById('modalYes');
+      function removeModal(){
+        bg?.remove();
+      }
+      close.addEventListener('click', removeModal);
+      close2.addEventListener('click', removeModal);
+      bg.addEventListener('click', (e)=>{ if(e.target === bg) removeModal(); });
+      yes.addEventListener('click', ()=>{
+        removeModal();
+        alert('Yay! I\'ll take care of everything. Can\'t wait ❤️');
+      })
+    });
+
+    // surprise button
+    document.getElementById('surpriseBtn').addEventListener('click', ()=>{
+      const old = document.getElementById('heroImg');
+      old.style.filter = 'blur(2px) brightness(0.9)';
+      document.getElementById('quote').textContent = 'A little mystery...';
+      document.getElementById('message').textContent = "I'll reveal it when we get there — trust me? ✨";
+      setTimeout(()=>{
+        document.getElementById('heroImg').src = CONFIG.HERO_IMAGE;
+      },1500)
+    })
+
+    // yes/no buttons
+    document.getElementById('yesBtn').addEventListener('click', ()=>{
+      const dest = CONFIG.DESTINATION_NAME;
+      const r = confirm('Amazing — should I make a small reservation for the lunch?');
+      if(r) alert('All set. I\'ll send the details soon. Love you ❤️');
+      else alert('No problem — we can keep it casual. Still excited!');
+    });
+
+    document.getElementById('noBtn').addEventListener('click', ()=>{
+      alert('Okay love — we can pick another day. Your call 💛');
+    });
+
+  </script>
+</body>
+</html>
